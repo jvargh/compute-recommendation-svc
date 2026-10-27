@@ -32,6 +32,12 @@ contains the direct dependency constraints for intentional updates.
 server operator's Azure identity. It is not a production or multi-user service.
 Run a single worker so the cache is shared by all requests.
 
+## Swagger testing guide
+
+See [Swagger testing guide](SWAGGER-TESTING.md) for a step-by-step walkthrough:
+preflight checks, version selection, subscription/resource-group tests, optional
+capabilities, cache verification, safe negative tests, and troubleshooting.
+
 ## Version and access requirements
 
 The default contract is `2026-10-05-preview`. Availability depends on the
