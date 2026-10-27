@@ -94,6 +94,52 @@ values appropriate for your subscription. The URI region chooses the API
 endpoint and is the current-preview default scoring region; an explicit
 `desiredLocations` list chooses the regions to evaluate.
 
+### Japan West example: 25 VMs across 10 candidate SKUs
+
+For `POST /api/scores/{region}`, select the example
+**Japan West: 25 VMs, 10 SKUs (legacy versions only)**.
+Manually set `region=japanwest`, `api-version=2026-09-05-preview`, and
+`refresh=false`. Selecting a Swagger example only fills the JSON body; it
+does not set path or query parameters.
+
+The request evaluates **25 instances per zone for each candidate SKU**; it does
+not divide 25 instances among the 10 SKUs or deploy any VMs. The 10-size request
+fits the legacy 20-size limit but will be rejected locally with HTTP 400 under
+`2026-10-05-preview`, which allows at most three sizes.
+
+Equivalent Swagger-generated cURL (Bash syntax; run in Git Bash or WSL, not
+directly in PowerShell):
+
+```bash
+curl -X 'POST' \
+  'http://127.0.0.1:8000/api/scores/japanwest?api-version=2026-09-05-preview&refresh=false' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "desiredLocations": [
+    "japanwest"
+  ],
+  "desiredSizes": [
+    {"sku": "Standard_L32s_v3"},
+    {"sku": "Standard_L32as_v3"},
+    {"sku": "Standard_L32s_v4"},
+    {"sku": "Standard_L32as_v4"},
+    {"sku": "Standard_L32aos_v4"},
+    {"sku": "Standard_L32als_v4"},
+    {"sku": "Standard_L32s_v2"},
+    {"sku": "Standard_E32ds_v5"},
+    {"sku": "Standard_E32ads_v5"},
+    {"sku": "Standard_E32bds_v5"}
+  ],
+  "desiredCount": 25,
+  "availabilityZones": true
+}'
+```
+
+Actual SKU support, zone availability, quota, and scores are determined by
+Azure. This example is not a recorded successful live result. Execute only
+when authorized and within your subscription's call allowance.
+
 ### What counts as a successful test?
 
 HTTP 200 with a contract-valid response demonstrates a successful API call.

@@ -92,9 +92,35 @@ def test_current_and_legacy_contracts_and_no_fallback(harness):
 @pytest.mark.parametrize("name", EXAMPLES)
 def test_every_public_example_is_callable(harness, name):
     client, _, calls, _ = harness
-    result = post(client, EXAMPLES[name]["value"])
+    result = post(
+        client, EXAMPLES[name]["value"],
+        params=LEGACY if name == "japanwest-25-vms-legacy" else CURRENT,
+    )
     assert result.status_code == 200, result.text
     assert json.loads(calls[0].content) == EXAMPLES[name]["value"]
+
+
+def test_japanwest_example_legacy_request_and_current_rejection(harness):
+    client, _, calls, _ = harness
+    body = EXAMPLES["japanwest-25-vms-legacy"]["value"]
+    assert body["desiredCount"] == 25
+    assert body["desiredLocations"] == ["japanwest"]
+    assert body["availabilityZones"] is True
+    assert [size["sku"] for size in body["desiredSizes"]] == [
+        "Standard_L32s_v3", "Standard_L32as_v3", "Standard_L32s_v4",
+        "Standard_L32as_v4", "Standard_L32aos_v4", "Standard_L32als_v4",
+        "Standard_L32s_v2", "Standard_E32ds_v5", "Standard_E32ads_v5",
+        "Standard_E32bds_v5",
+    ]
+    assert post(client, body, route="/api/scores/japanwest").status_code == 400
+    assert calls == []
+    result = post(
+        client, body, params={**LEGACY, "refresh": False}, route="/api/scores/japanwest",
+    )
+    assert result.status_code == 200
+    assert calls[0].url.path.endswith("/locations/japanwest/placementScores/regular/generate")
+    assert calls[0].url.params["api-version"] == "2026-09-05-preview"
+    assert json.loads(calls[0].content) == body
 
 
 @pytest.mark.parametrize("version", [

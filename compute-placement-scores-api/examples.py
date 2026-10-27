@@ -6,6 +6,31 @@ BASE = {
 }
 
 EXAMPLES = {
+    "japanwest-25-vms-legacy": {
+        "summary": "Japan West: 25 VMs, 10 SKUs (legacy versions only)",
+        "description": (
+            "Set region=japanwest, api-version=2026-09-05-preview and refresh=false. "
+            "The 10 sizes exceed the current preview's 3-size limit. "
+            "Swagger example selection fills only the body, not the parameters."
+        ),
+        "value": {
+            "desiredLocations": ["japanwest"],
+            "desiredSizes": [
+                {"sku": "Standard_L32s_v3"},
+                {"sku": "Standard_L32as_v3"},
+                {"sku": "Standard_L32s_v4"},
+                {"sku": "Standard_L32as_v4"},
+                {"sku": "Standard_L32aos_v4"},
+                {"sku": "Standard_L32als_v4"},
+                {"sku": "Standard_L32s_v2"},
+                {"sku": "Standard_E32ds_v5"},
+                {"sku": "Standard_E32ads_v5"},
+                {"sku": "Standard_E32bds_v5"},
+            ],
+            "desiredCount": 25,
+            "availabilityZones": True,
+        },
+    },
     "zonal": {"summary": "Zonal scores across regions and sizes", "value": BASE},
     "regional": {
         "summary": "Regional scores",

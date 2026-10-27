@@ -37,6 +37,8 @@ Run a single worker so the cache is shared by all requests.
 See [Swagger testing guide](SWAGGER-TESTING.md) for a step-by-step walkthrough:
 preflight checks, version selection, subscription/resource-group tests, optional
 capabilities, cache verification, safe negative tests, and troubleshooting.
+It includes a Japan West POST example for 25 instances per zone across 10
+candidate SKUs, using `2026-09-05-preview` (legacy contract).
 
 ## Version and access requirements
 
