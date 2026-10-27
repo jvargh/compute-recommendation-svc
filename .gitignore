@@ -1,0 +1,31 @@
+# Local Python environments and generated artifacts
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+build/
+dist/
+*.egg-info/
+
+# Local configuration and logs
+.env
+.env.*
+!.env.example
+*.log
+
+# NDA specification documents and live subscription results
+*.[dD][oO][cC][xX]
+~$*
+live-results.json
+live-*-results.json
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
