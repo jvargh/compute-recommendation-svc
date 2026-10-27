@@ -11,7 +11,7 @@ Requires Python 3.11+ and Azure CLI on PATH.
 
 ```powershell
 git clone https://github.com/jvargh/compute-recommendation-svc.git
-Set-Location .\compute-recommendation-svc
+Set-Location .\compute-recommendation-svc\compute-placement-scores-api
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
 az login
