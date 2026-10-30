@@ -42,6 +42,11 @@ candidate SKUs, using `2026-09-05-preview` (legacy contract).
 
 ## Version and access requirements
 
+For dated A100 investigations, the full US score matrix, earlier global/EUS2
+checks, MIG caveats and a reproducible US-only script, see
+[A100 capacity findings](A100-CAPACITY-FINDINGS.md). These are historical test
+observations, not live capacity commitments or production-subscription results.
+
 The default contract is `2026-10-05-preview`. Availability depends on the
 service rollout, subscription and region. Azure may return HTTP 400
 `NoRegisteredProviderFound` for an unavailable version. Read `/api/provider`
